@@ -4,6 +4,7 @@
     </div>
     <div class="content">
         <h4 style="margin-top: 0;font-size: 20px;color:grey;">Note:</h4>
+
         <p>ptInsert is a directive that you can use this to insert record to database simply...</p>
         <br>
         <h4 style="margin-top: 0;font-size: 20px;color:grey;">Arguments:</h4>
@@ -20,40 +21,89 @@
 
                 <tr>
                     <td>
-                        element
+                        data
                     </td>
                     <td>
-                        <a href="" class="label type-hint type-hint-string">string</a><a href="" class="label type-hint type-hint-domelement">DOMElement</a>
+                        object
                     </td>
                     <td>
-                        <p>HTML string or DOMElement to be wrapped into jQuery.</p>
+                        <p>the record which inset into database </p>
                     </td>
                 </tr>
+                <tr>
+                    <td>
+                        service
+                    </td>
+                    <td>
+
+                        String
+                    </td>
+                    <td>
+                        <p>the operate service</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        flag
+                    </td>
+                    <td>
+                        1 or 0
+                    </td>
+                    <td>
+                        <p>0 :(add: get method)/1 : (add: get method)</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        redirect
+                    </td>
+                    <td>
+                        object
+                    </td>
+                    <td>
+                        <p>redirect url and param</p>
+                    </td>
+                </tr>
+
                 </tbody>
             </table>
         </section>
         <br>
         <h4 style="margin-top: 0;font-size: 20px;color:grey;">Usage:</h4>
+
         <p style="font-size: 16px;">The <strong>normalization</strong> process is as follows:</p>
-        <pre class="ng-scope"><code class="lang-html"><span class="dec">&lt;!doctype html&gt;</span><span class="pln">
-</span><span class="tag">&lt;html&gt;</span><span class="pln">
-</span><span class="tag">&lt;body&gt;</span><span class="pln">
-  </span><span class="tag">&lt;div</span><span class="pln"> </span><span class="atn">ng-controller</span><span class="pun">=</span><span class="atv">"MyController"</span><span class="tag">&gt;</span><span class="pln">
-    Hello {{greetMe}}!
-  </span><span class="tag">&lt;/div&gt;</span><span class="pln">
-  </span><span class="tag">&lt;script</span><span class="pln"> </span><span class="atn">src</span><span class="pun">=</span><span class="atv">"http://code.angularjs.org/snapshot/angular.js"</span><span class="tag">&gt;&lt;/script&gt;</span><span class="pln">
 
-  </span><span class="tag">&lt;script&gt;</span><span class="pln">
-    angular</span><span class="pun">.</span><span class="pln">module</span><span class="pun">(</span><span class="str">'myApp'</span><span class="pun">,</span><span class="pln"> </span><span class="pun">[])</span><span class="pln">
-      </span><span class="pun">.</span><span class="pln">controller</span><span class="pun">(</span><span class="str">'MyController'</span><span class="pun">,</span><span class="pln"> </span><span class="pun">[</span><span class="str">'$scope'</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">function</span><span class="pln"> </span><span class="pun">(</span><span class="pln">$scope</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
-        $scope</span><span class="pun">.</span><span class="pln">greetMe </span><span class="pun">=</span><span class="pln"> </span><span class="str">'World'</span><span class="pun">;</span><span class="pln">
-      </span><span class="pun">}]);</span><span class="pln">
+        <P>Controller:</P>
+        <pre class="ng-scope"><code class="lang-html">
+            <p>var testController = angular.module('testController',[])
+                testController.controller('insertController',function($scope){
+                $scope.insertData = {
+                'id':'1',
+                'name': 'insert'
+                }
+                $scope.insertRedirect={
+                'url':'#',
+                'param':'1'
+                }
+                })
+            </p>
+        </code></pre>
+        <P>Service:</P>
+        <pre class="ng-scope"><code class="lang-html">
+            <p>testService.factory('insertService',function($resource){
+                return $resource("#");
+                })
+            </p>
+        </code></pre>
+        <P>Html:</P>
+        <pre class="ng-scope"><code class="lang-html">
+            <p>
 
-    angular</span><span class="pun">.</span><span class="pln">element</span><span class="pun">(</span><span class="pln">document</span><span class="pun">).</span><span class="pln">ready</span><span class="pun">(</span><span class="kwd">function</span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
-      angular</span><span class="pun">.</span><span class="pln">bootstrap</span><span class="pun">(</span><span class="pln">document</span><span class="pun">,</span><span class="pln"> </span><span class="pun">[</span><span class="str">'myApp'</span><span class="pun">]);</span><span class="pln">
-    </span><span class="pun">});</span><span class="pln">
-  </span><span class="tag">&lt;/script&gt;</span><span class="pln">
-</span><span class="tag">&lt;/body&gt;</span><span class="pln">
-</span><span class="tag">&lt;/html&gt;</span></code></pre>
+                &lt;div ng-controller="insertController">
+                &lt;button pt-insert data="insertData" service="insertService" flag="0" redirect="insertRedirect">add
+                &lt;/button>
+                &lt;/div>
+            </p>
+        </code></pre>
     </div>
 </div>
