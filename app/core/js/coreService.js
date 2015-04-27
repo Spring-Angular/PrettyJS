@@ -17,7 +17,8 @@ coreService.factory('ptGlobalDataService', function () {
         'idx': '',
         'service': '',
         'redirectUrl': '',
-        'redirectParams': ''
+        'redirectParams': '',
+        'flag':''
     };
     return globalData;
 });
