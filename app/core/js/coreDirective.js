@@ -65,7 +65,7 @@ coreDirective.directive('ptDeleteConfirmModal', function () {
     }
 });
 
-coreDirective.directive('ptDelete', function (shareDataService) {
+coreDirective.directive('ptDelete', function (ptGlobalDataService) {
     return {
         strict: 'EAC',
         template: '',
@@ -80,15 +80,15 @@ coreDirective.directive('ptDelete', function (shareDataService) {
         },
         link: function (scope, elm, attrs, ctrl) {
             elm.on('click', function () {
-                shareDataService.tempData = scope.data;
-                shareDataService.idx = scope.idx;
-                shareDataService.service = scope.service;
-                shareDataService.redirectUrl = scope.url;
-                shareDataService.redirectParams = scope.params;
+                ptGlobalDataService.tempData = scope.data;
+                ptGlobalDataService.idx = scope.idx;
+                ptGlobalDataService.service = scope.service;
+                ptGlobalDataService.redirectUrl = scope.url;
+                ptGlobalDataService.redirectParams = scope.params;
                 if(scope.flag===null || scope.flag==='' || scope.flag==='0' || typeof (scope.flag)==='undefined' || scope.flag==='undefined'){
-                    shareDataService.flag=0;
+                    ptGlobalDataService.flag=0;
                 }else{
-                    shareDataService.flag=1;
+                    ptGlobalDataService.flag=1;
                 }
                 angular.element($("#deleteConfirmModal").find('h4').html('Ensure to delete ' + scope.msg + '?'));
                 angular.element($("#layer").show());
@@ -112,7 +112,7 @@ coreDirective.directive('ptHideDeleteConfirmModal', function () {
 });
 
 
-coreDirective.directive('ptInsert', function (shareDataService, $rootScope) {
+coreDirective.directive('ptInsert', function (ptGlobalDataService, $rootScope) {
     return {
         strict: 'EAC',
         template: '',
@@ -124,20 +124,18 @@ coreDirective.directive('ptInsert', function (shareDataService, $rootScope) {
         },
         link: function (scope, elm, attrs, ctrl) {
             elm.on('click', function () {
-                console.log('OK');
-                console.log(scope.redirect);
-                shareDataService.tempData = scope.data;
-                shareDataService.service = scope.service;
+                ptGlobalDataService.tempData = scope.data;
+                ptGlobalDataService.service = scope.service;
                 if (typeof (scope.redirect) !== 'undefined') {
-                    shareDataService.redirectUrl = scope.redirect.url;
+                    ptGlobalDataService.redirectUrl = scope.redirect.url;
                 }
                 if (typeof (scope.redirect) !== 'undefined') {
-                    shareDataService.redirectParams = scope.redirect.params;
+                    ptGlobalDataService.redirectParams = scope.redirect.params;
                 }
                 if(scope.flag===null || scope.flag==='' || scope.flag==='0' || typeof (scope.flag)==='undefined' || scope.flag==='undefined'){
-                    shareDataService.flag=0;
+                    ptGlobalDataService.flag=0;
                 }else{
-                    shareDataService.flag=1;
+                    ptGlobalDataService.flag=1;
                 }
                 $rootScope.operationItem(1);
             });
@@ -145,7 +143,7 @@ coreDirective.directive('ptInsert', function (shareDataService, $rootScope) {
     }
 });
 
-coreDirective.directive('ptUpdate', function (shareDataService, $rootScope) {
+coreDirective.directive('ptUpdate', function (ptGlobalDataService, $rootScope) {
     return {
         strict: 'EAC',
         template: '',
@@ -157,18 +155,18 @@ coreDirective.directive('ptUpdate', function (shareDataService, $rootScope) {
         },
         link: function (scope, elm, attrs, ctrl) {
             elm.on('click', function () {
-                shareDataService.tempData = scope.data;
-                shareDataService.service = scope.service;
+                ptGlobalDataService.tempData = scope.data;
+                ptGlobalDataService.service = scope.service;
                 if (typeof (scope.redirect) !== 'undefined') {
-                    shareDataService.redirectUrl = scope.redirect.url;
+                    ptGlobalDataService.redirectUrl = scope.redirect.url;
                 }
                 if (typeof (scope.redirect) !== 'undefined') {
-                    shareDataService.redirectParams = scope.redirect.params;
+                    ptGlobalDataService.redirectParams = scope.redirect.params;
                 }
                 if(scope.flag===null || scope.flag==='' || scope.flag==='0' || typeof (scope.flag)==='undefined' || scope.flag==='undefined'){
-                    shareDataService.flag=0;
+                    ptGlobalDataService.flag=0;
                 }else{
-                    shareDataService.flag=1;
+                    ptGlobalDataService.flag=1;
                 }
                 $rootScope.operationItem(3);
             });
