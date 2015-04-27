@@ -74,8 +74,7 @@ coreDirective.directive('ptDelete', function (ptGlobalDataService) {
             'idx': '=',
             'msg': '=',
             'service': '@',
-            'url': '@',
-            'params': '@',
+            'redirect': '=',
             'flag':'@'
         },
         link: function (scope, elm, attrs, ctrl) {
@@ -83,8 +82,12 @@ coreDirective.directive('ptDelete', function (ptGlobalDataService) {
                 ptGlobalDataService.tempData = scope.data;
                 ptGlobalDataService.idx = scope.idx;
                 ptGlobalDataService.service = scope.service;
-                ptGlobalDataService.redirectUrl = scope.url;
-                ptGlobalDataService.redirectParams = scope.params;
+                if (typeof (scope.redirect) !== 'undefined') {
+                    ptGlobalDataService.redirectUrl = scope.redirect.url;
+                }
+                if (typeof (scope.redirect) !== 'undefined') {
+                    ptGlobalDataService.redirectParams = scope.redirect.params;
+                }
                 if(scope.flag===null || scope.flag==='' || scope.flag==='0' || typeof (scope.flag)==='undefined' || scope.flag==='undefined'){
                     ptGlobalDataService.flag=0;
                 }else{

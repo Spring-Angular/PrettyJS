@@ -1,3 +1,24 @@
 <div class="row">
     <div class="col-md-12 spacer"><h2>Dashboard</h2><br></div>
+
+    <div ng-controller="insertController">
+        <button pt-insert data="insertData" service="insertService" flag = "0" redirect="insertRedirect" >add</button>
+    </div>
+    <div ng-controller="deleteController">
+        <table>
+            <tr>
+                <th>No.</th>
+                <th>Name</th>
+                <th>Operate</th>
+            </tr>
+            <td ng-repeat="data in dataList">
+                <th ng-bind="data.id"></th>
+                <th ng-bind="data.name"></th>
+                <th pt-delete data="data" idx="$idx" service = "deleteService" flag = "0" redirect="data.deleteRedirect" >delete</th>
+            </td>
+        </table>
+    </div>
+    <div ng-controller="updateController">
+
+    </div>
 </div>

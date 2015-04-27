@@ -10,6 +10,13 @@ var demoApp = angular.module('demoApp', [
     'coreController',
     'coreFilter'
 
+    /*
+    * for test
+    *
+    * */
+    ,
+    'testController',
+    'testService'
 ]);
 /*
 * testing*/
