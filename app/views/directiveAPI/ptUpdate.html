@@ -4,7 +4,7 @@
     </div>
     <div class="content">
         <h4 style="margin-top: 0;font-size: 20px;color:grey;">Note:</h4>
-        <p>ptUpdate is a directive that you can use this to update record to database simply,if you use ngResource,you should generate a update method(http method:put) in your service,because ngResource has no default update method</p>
+        <p>ptUpdate is a directive that you can use this to update record to database simply,if you use ngResource,you should generate a update method(http method:put) in your service,because ngResource has no default update method,new Object must named 'newData'</p>
         <br>
         <h4 style="margin-top: 0;font-size: 20px;color:grey;">Arguments:</h4>
         <section class="api-section">
@@ -33,7 +33,7 @@
                         service
                     </td>
                     <td>
-                        Object <span style="color: red">[Required]</span>
+                        String <span style="color: red">[Required]</span>
                     </td>
                     <td>
                         <p>The service of the update </p>

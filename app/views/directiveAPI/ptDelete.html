@@ -1,19 +1,89 @@
-<div class="block-flat">
+<div class="block-flat" style="border: 0 red solid;box-shadow:0 0">
     <div class="header">
-        <h3>Basic Buttons</h3>
+        <h3>ptDelete</h3>
     </div>
     <div class="content">
-        <h4>Examples</h4>
-        <p>This is the basic set of buttons.</p>
-        <div class="spacer spacer-bottom">
-            <button type="button" class="btn btn-default">Default</button>
-            <button type="button" class="btn btn-primary">Primary</button>
-            <button type="button" class="btn btn-success">Green</button>
-            <button type="button" class="btn btn-info">Blue</button>
-            <button type="button" class="btn btn-warning">Orange</button>
-            <button type="button" class="btn btn-danger">Red</button>
-            <button type="button" class="btn btn-prusia">Prusia</button>
-            <button type="button" class="btn btn-dark">Dark</button>
-        </div>
+        <h4 style="margin-top: 0;font-size: 20px;color:grey;">Note:</h4>
+
+        <p>ptDelete is a directive that you can use this to delete record from database simply...list collection must named 'dataList'</p>
+        <br>
+        <h4 style="margin-top: 0;font-size: 20px;color:grey;">Arguments:</h4>
+        <section class="api-section">
+            <table class="variables-matrix input-arguments">
+                <thead>
+                <tr style="background-color: lightgrey;font-weight: bold">
+                    <th>Param</th>
+                    <th>Type</th>
+                    <th>Details</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                <tr>
+                    <td>
+                        data
+                    </td>
+                    <td>
+                        object <span style="color: red">[Required]</span>
+                    </td>
+                    <td>
+                        <p>the record which delete from list collection </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        service
+                    </td>
+                    <td>
+
+                        String <span style="color: red">[Required]</span>
+                    </td>
+                    <td>
+                        <p>the operate service</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        idx
+                    </td>
+                    <td>
+                        Object <span style="color: red">[Required]</span>
+                    </td>
+                    <td>
+                        <p>pass a index in list collection of delete object,is usually $index</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        msg
+                    </td>
+                    <td>
+                        object <span style="color: red">[Required]</span>
+                    </td>
+                    <td>
+                        <p>get a name or other attrs to use into show modal</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        flag
+                    </td>
+                    <td>
+                        String <span style="color: deepskyblue">[Optional]</span>
+                    </td>
+                    <td>
+                        <p>If you set this param to 0,you will use the standard way to send http request,or to 1 that you will use post method to do every operation,default :0</p>
+                    </td>
+                </tr>
+
+                </tbody>
+            </table>
+        </section>
+        <br>
+        <h4 style="margin-top: 0;font-size: 20px;color:grey;">Usage:</h4>
+
+        <P style="font-size: 16px;">Html:</P>
+        <pre class="ng-scope"><code class="lang-html">&lt;i class="fa fa-trash-o"  style="margin-left: 5px;cursor:pointer;" data-original-title="Delete Catalog" data-toggle="tooltip" data-placement="top" tool-tips delete msg="catalog.catalogVO.name" data="catalog" idx="$index" service="catalogOperationService"></i>
+        </code></pre>
     </div>
 </div>
