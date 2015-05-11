@@ -1,0 +1,27 @@
+<div class="block-flat" style="border: 0 red solid;box-shadow:0 0">
+    <div class="header">
+        <h3></h3>unbusy</h3>
+    </div>
+    <div class="content">
+        <h4 style="margin-top: 0;font-size: 20px;color:grey;">Note:</h4>
+
+        <p>you can use this method to hide loading layer</p>
+        <br>
+
+        <h4 style="margin-top: 0;font-size: 20px;color:grey;">Usage:</h4>
+
+        <P style="font-size: 16px;">Controller:</P>
+        <pre class="ng-scope"><code class="lang-html">$scope.$emit('BUSY');
+            catalogOperationService.get({id: url_params.catalogId}, function (resp) {
+            $scope.$emit('UNBUSY');
+            $scope.newData = resp.data;
+            if ($scope.newData.catalogCriteriaVOs.length === 0) {
+            $scope.type = {'type': 0};
+            } else {
+            $scope.type = {'type': 1};
+            }
+
+            });
+        </code></pre>
+    </div>
+</div>

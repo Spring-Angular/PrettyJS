@@ -5,7 +5,7 @@
     <div class="content">
         <h4 style="margin-top: 0;font-size: 20px;color:grey;">Note:</h4>
 
-        <p>ptInsert is a directive that you can use this to insert record to database simply...</p>
+        <p>ptInsert is a directive that you can use this to insert record to database simply...new object must named 'newData'</p>
         <br>
         <h4 style="margin-top: 0;font-size: 20px;color:grey;">Arguments:</h4>
         <section class="api-section">
@@ -24,10 +24,10 @@
                         data
                     </td>
                     <td>
-                        object
+                        object <span style="color: red">[Required]</span>
                     </td>
                     <td>
-                        <p>the record which inset into database </p>
+                        <p>the record which insert into database </p>
                     </td>
                 </tr>
                 <tr>
@@ -36,7 +36,7 @@
                     </td>
                     <td>
 
-                        String
+                        String <span style="color: red">[Required]</span>
                     </td>
                     <td>
                         <p>the operate service</p>
@@ -47,10 +47,10 @@
                         flag
                     </td>
                     <td>
-                        1 or 0
+                        1 or 0 <span style="color: deepskyblue">[Optional]</span>
                     </td>
                     <td>
-                        <p>0 :(add: get method)/1 : (add: get method)</p>
+                        <p>If you set this param to 0,you will use the standard way to send http request,or to 1 that you will use post method to do every operation,default :0</p>
                     </td>
                 </tr>
                 <tr>
@@ -58,7 +58,7 @@
                         redirect
                     </td>
                     <td>
-                        object
+                        object <span style="color: deepskyblue">[Optional]</span>
                     </td>
                     <td>
                         <p>redirect url and param</p>
@@ -71,11 +71,8 @@
         <br>
         <h4 style="margin-top: 0;font-size: 20px;color:grey;">Usage:</h4>
 
-        <p style="font-size: 16px;">The <strong>normalization</strong> process is as follows:</p>
-
-        <P>Controller:</P>
-        <pre class="ng-scope"><code class="lang-html">
-            <p>var testController = angular.module('testController',[])
+        <P style="font-size: 16px;">Controller:</P>
+        <pre class="ng-scope"><code class="lang-html">var testController = angular.module('testController',[])
                 testController.controller('insertController',function($scope){
                 $scope.insertData = {
                 'id':'1',
@@ -86,24 +83,18 @@
                 'param':'1'
                 }
                 })
-            </p>
+
         </code></pre>
-        <P>Service:</P>
-        <pre class="ng-scope"><code class="lang-html">
-            <p>testService.factory('insertService',function($resource){
+        <P style="font-size: 16px;">Service:</P>
+        <pre class="ng-scope"><code class="lang-html">testService.factory('insertService',function($resource){
                 return $resource("#");
                 })
-            </p>
         </code></pre>
-        <P>Html:</P>
-        <pre class="ng-scope"><code class="lang-html">
-            <p>
-
-                &lt;div ng-controller="insertController">
-                &lt;button pt-insert data="insertData" service="insertService" flag="0" redirect="insertRedirect">add
-                &lt;/button>
-                &lt;/div>
-            </p>
+        <P style="font-size: 16px;">Html:</P>
+        <pre class="ng-scope"><code class="lang-html">&lt;div ng-controller="insertController">
+            &lt;button pt-insert data="insertData" service="insertService" flag="0" redirect="insertRedirect">add
+            &lt;/button>
+            &lt;/div>
         </code></pre>
     </div>
 </div>
