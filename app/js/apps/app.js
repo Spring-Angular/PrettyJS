@@ -4,7 +4,7 @@
 // Declare app level module which depends on filters, and services
 
 var demoApp = angular.module('demoApp', [
-    'ngRoute',
+    'ui.router',
     'coreDirective',
     'coreService',
     'coreController',
@@ -18,8 +18,6 @@ var demoApp = angular.module('demoApp', [
     'testController',
     'testService'
 ]);
-/*
-* testing*/
 
 demoApp.run(function ($rootScope, $templateCache) {
     $rootScope.$on('$viewContentLoaded', function () {
@@ -27,63 +25,20 @@ demoApp.run(function ($rootScope, $templateCache) {
     });
 });
 
-demoApp.config(['$routeProvider', '$httpProvider', function ($routeProvider, $httpProvider) {
-    $httpProvider.defaults.useXDomain = true;
-    delete $httpProvider.defaults.headers.common['X-Requested-With'];
-    $httpProvider.defaults.headers.put['Content-Type'] = 'text/plain';
-    $httpProvider.defaults.headers.post['Content-Type'] = 'text/plain';
+demoApp.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
+    $urlRouterProvider.otherwise("/dashboard");
 
-
-    // Override $http service's default transformRequest
-    $httpProvider.defaults.transformRequest = [function (data) {
-        /**
-         * The workhorse; converts an object to x-www-form-urlencoded serialization.
-         * @param {Object} obj
-         * @return {String}
-         */
-        var param = function (obj) {
-            var query = '';
-            var name, value, fullSubName, subName, subValue, innerObj, i;
-
-            for (name in obj) {
-                value = obj[name];
-
-                if (value instanceof Array) {
-                    for (i = 0; i < value.length; ++i) {
-                        subValue = value[i];
-                        fullSubName = name + '[' + i + ']';
-                        innerObj = {};
-                        innerObj[fullSubName] = subValue;
-                        query += param(innerObj) + '&';
-                    }
-                } else if (value instanceof Object) {
-                    for (subName in value) {
-                        subValue = value[subName];
-                        fullSubName = name + '[' + subName + ']';
-                        innerObj = {};
-                        innerObj[fullSubName] = subValue;
-                        query += param(innerObj) + '&';
-                    }
-                } else if (value !== undefined && value !== null) {
-                    query += encodeURIComponent(name) + '='
-                    + encodeURIComponent(value) + '&';
-                }
+    $stateProvider
+        .state("dashboard", {
+            url: "/dashboard",
+            templateUrl: "dashboard.html"
+        })
+        .state("dashboard.detail", {
+            url:"/api/:type",
+            templateUrl: function(params) {
+                return "directiveAPI/"+ params.type +".html";
             }
-
-            return query.length ? query.substr(0, query.length - 1) : query;
-        };
-
-        return angular.isObject(data) && String(data) !== '[object File]'
-            ? param(data)
-            : data;
-    }];
-    $routeProvider.
-        when('/dashboard', {
-            templateUrl: 'dashboard.html'
-        }).
-        otherwise({
-            redirectTo: '/dashboard'
-        });
+        })
 }]);
 
 
