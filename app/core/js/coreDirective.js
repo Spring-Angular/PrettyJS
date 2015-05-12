@@ -75,7 +75,7 @@ coreDirective.directive('ptDelete', function (ptGlobalDataService) {
             'msg': '=',
             'service': '@',
             'redirect': '=',
-            'flag':'@'
+            'flag': '@'
         },
         link: function (scope, elm, attrs, ctrl) {
             elm.on('click', function () {
@@ -88,10 +88,10 @@ coreDirective.directive('ptDelete', function (ptGlobalDataService) {
                 if (typeof (scope.redirect) !== 'undefined') {
                     ptGlobalDataService.redirectParams = scope.redirect.params;
                 }
-                if(scope.flag===null || scope.flag==='' || scope.flag==='0' || typeof (scope.flag)==='undefined' || scope.flag==='undefined'){
-                    ptGlobalDataService.flag=0;
-                }else{
-                    ptGlobalDataService.flag=1;
+                if (scope.flag === null || scope.flag === '' || scope.flag === '0' || typeof (scope.flag) === 'undefined' || scope.flag === 'undefined') {
+                    ptGlobalDataService.flag = 0;
+                } else {
+                    ptGlobalDataService.flag = 1;
                 }
                 angular.element($("#deleteConfirmModal").find('h4').html('Ensure to delete ' + scope.msg + '?'));
                 angular.element($("#layer").show());
@@ -123,7 +123,7 @@ coreDirective.directive('ptInsert', function (ptGlobalDataService, $rootScope) {
             'data': '=',
             'service': '@',
             'redirect': '=',
-            'flag':'@'
+            'flag': '@'
         },
         link: function (scope, elm, attrs, ctrl) {
             elm.on('click', function () {
@@ -135,10 +135,10 @@ coreDirective.directive('ptInsert', function (ptGlobalDataService, $rootScope) {
                 if (typeof (scope.redirect) !== 'undefined') {
                     ptGlobalDataService.redirectParams = scope.redirect.params;
                 }
-                if(scope.flag===null || scope.flag==='' || scope.flag==='0' || typeof (scope.flag)==='undefined' || scope.flag==='undefined'){
-                    ptGlobalDataService.flag=0;
-                }else{
-                    ptGlobalDataService.flag=1;
+                if (scope.flag === null || scope.flag === '' || scope.flag === '0' || typeof (scope.flag) === 'undefined' || scope.flag === 'undefined') {
+                    ptGlobalDataService.flag = 0;
+                } else {
+                    ptGlobalDataService.flag = 1;
                 }
                 $rootScope.operationItem(1);
             });
@@ -154,7 +154,7 @@ coreDirective.directive('ptUpdate', function (ptGlobalDataService, $rootScope) {
             'data': '=',
             'service': '@',
             'redirect': '=',
-            'flag':'@'
+            'flag': '@'
         },
         link: function (scope, elm, attrs, ctrl) {
             elm.on('click', function () {
@@ -166,10 +166,10 @@ coreDirective.directive('ptUpdate', function (ptGlobalDataService, $rootScope) {
                 if (typeof (scope.redirect) !== 'undefined') {
                     ptGlobalDataService.redirectParams = scope.redirect.params;
                 }
-                if(scope.flag===null || scope.flag==='' || scope.flag==='0' || typeof (scope.flag)==='undefined' || scope.flag==='undefined'){
-                    ptGlobalDataService.flag=0;
-                }else{
-                    ptGlobalDataService.flag=1;
+                if (scope.flag === null || scope.flag === '' || scope.flag === '0' || typeof (scope.flag) === 'undefined' || scope.flag === 'undefined') {
+                    ptGlobalDataService.flag = 0;
+                } else {
+                    ptGlobalDataService.flag = 1;
                 }
                 $rootScope.operationItem(3);
             });
@@ -221,25 +221,27 @@ coreDirective.directive("ptRefreshMultipleSelect", function () {
  * */
 
 /*
- *  input Reg Exp or intput validate type(which in commonService->validateService), check match Reg Exp or not (for form)
+ *  input Reg Exp or intput validate type(which in coreService->ptValidateService), check match Reg Exp or not (for form)
  *
  * example:
- * <input name ="num" ng-model="numa" common-validate  valid-r-e="[0-9]"/>
- * <form name="form">
- *   <div ng-hide="form.num.$error.commonValidate">error</div>
- * </form>
+ *<form name="form">
+ *<input name="num" ng-model="num" pt-validate valid-r-e="[0-9]" valid-err-msg="Error"/>
+ *<div ng-show="form.num.$error.ptValidate">error</div>
+ </form>
  * */
 
-coreDirective.directive('ptValidate', function (validateService) {
+coreDirective.directive('ptValidate', function (ptValidateService) {
     return {
         restrict: 'EAC',
         require: 'ngModel',
         scope: {
             validRE: '@',
             validErrMsg: '@',
-            validType: '@'
+            validType: '@',
+            required:'@'
         },
         link: function (scope, elm, attrs, ctrl) {
+
             var validGroup = [];
             if ((scope.validRE !== undefined) && (scope.validErrMsg !== undefined)) {
                 validGroup.push({'reg': new RegExp(scope.validRE), 'errMsg': scope.validErrMsg});
@@ -247,20 +249,24 @@ coreDirective.directive('ptValidate', function (validateService) {
             if ((scope.validType !== undefined)) {
                 var typeArray = scope.validType.split(' ');
                 for (var num in typeArray) {
-                    validGroup.push(validateService.choice(typeArray[num]));
+                    validGroup.push(ptValidateService.choice(typeArray[num]));
                 }
             }
-            ctrl.$validators.commonValidate = function (modelValue, viewValue) {
+            ctrl.$validators.ptValidate = function (modelValue, viewValue) {
+                elm.parent().find('.inputError').remove();
                 if (ctrl.$isEmpty(modelValue)) {
+                    elm.parent().find('.inputError').remove();
                     return true;
                 }
                 else {
                     for (var num in validGroup) {
                         console.log(validGroup[num].reg);
                         if (!(validGroup[num].reg.test(viewValue))) {
+                            elm.after('<span class="inputError"> <span class="badge badge-danger" style="margin-top: 5px;"><i class="fa fa-times"></i></span>'+scope.validErrMsg+'</span>');
                             return false;
                         }
                     }
+                    elm.parent().find('.inputError').remove();
                     return true;
                 }
             };
