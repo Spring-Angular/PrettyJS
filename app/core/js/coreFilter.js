@@ -29,3 +29,13 @@ coreFilter.filter('ptRemoveSemicolonFilter', function () {
         return temp;
     };
 });
+
+
+coreFilter.filter('ptTimeFormatFilter',function(){
+    return function(input){
+        var temp = '';
+        temp = input.getFullYear() +'-'+ (input.getMonth()+1) + '-' + input.getDay() + ' '+ input.getHours()+ ':' + input.getMinutes() + ':' +input.getSeconds();
+
+        return temp;
+    };
+});
